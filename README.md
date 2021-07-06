@@ -4,7 +4,7 @@
 7/20/2021
 
 ### Project Title
-GitHub Project 
+GitHub Project (utilizing Project 2's Bikeshare) 
 
 ### Description
 Fork the pdnsnd_github repo and add the bikehsare.py file and its data files
