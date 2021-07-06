@@ -71,6 +71,10 @@ def load_data(city, month, day):
     
     return df
 
+def start_the_clock():
+    start_time = time.time()
+    rounded_time = round((time.time() - start_time), 1)
+    return rounded_time
 
 def time_stats(df):
     """Displays statistics on the most frequent times of travel."""
@@ -105,7 +109,7 @@ def time_stats(df):
     popular_hour = df['hour'].mode()[0]
     print('Most common start hour: {}'.format(popular_hour))
 
-    print("\nThis took %s seconds." % round((time.time() - start_time), 1))
+    print("\nThis took %s seconds." % start_the_clock())
     print('-'*40)
 
 
@@ -128,7 +132,7 @@ def station_stats(df):
     combo_stations = df.groupby(['Start Station','End Station']).size().idxmax()
     print('Most common combination of start station and end station: {}'.format(combo_stations))
 
-    print("\nThis took %s seconds." % round((time.time() - start_time), 1))
+    print("\nThis took %s seconds." % start_the_clock())
     print('-'*40)
 
 
@@ -146,7 +150,7 @@ def trip_duration_stats(df):
     mean_travel_time = df['Trip Duration'].mean()
     print('The average travel time: {}'.format(round(mean_travel_time, 1)))
 
-    print("\nThis took %s seconds." % round((time.time() - start_time), 1))
+    print("\nThis took %s seconds." % start_the_clock())
     print('-'*40)
 
 
@@ -183,7 +187,7 @@ def user_stats(df):
         print('The Birth Year column does not exist.')
         print('\n')
 
-    print("\nThis took %s seconds." % round((time.time() - start_time), 1))
+    print("\nThis took %s seconds." % start_the_clock())
     print('-'*40)
 
 # *** SOURCE FOR THE CODE IN THIS FUNCTION: Based on code provided by Reviewer from initial submission ***
