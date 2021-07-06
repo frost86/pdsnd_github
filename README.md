@@ -11,9 +11,9 @@ Fork the pdnsnd_github repo and add the bikehsare.py file and its data files
 
 ### Files used
 bikeshare.py
-chicago.csv
-new_york_city.csv
-washington.csv
+chicago.csv (.gitignore)
+new_york_city.csv (.gitignore)
+washington.csv (.gitignore)
 
 ### Credits
 https://github.com/udacity/pdsnd_github
