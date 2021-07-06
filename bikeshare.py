@@ -71,6 +71,7 @@ def load_data(city, month, day):
     return df
 
 def start_the_clock():
+    # created a function that will calculate the time it takes to calculate
     start_time = time.time()
     rounded_time = round((time.time() - start_time), 1)
     return rounded_time
