@@ -1,6 +1,5 @@
 import time
 import pandas as pd
-import numpy as np
 
 CITY_DATA = { 'chicago': 'chicago.csv',
               'new york city': 'new_york_city.csv',
@@ -56,7 +55,7 @@ def load_data(city, month, day):
     
     # Extract the month and day of the week from Start Time to create new columns
     df['month'] = df['Start Time'].dt.month
-    df['day_of_week'] = df['Start Time'].dt.weekday_name
+    df['day_of_week'] = df['Start Time'].dt.day_name()
     
     # Filter the month if applicable
     if month != 'all':
@@ -71,6 +70,11 @@ def load_data(city, month, day):
     
     return df
 
+def start_the_clock():
+    # created a function that will calculate the time it takes to calculate
+    start_time = time.time()
+    rounded_time = round((time.time() - start_time), 1)
+    return rounded_time
 
 def time_stats(df):
     """Displays statistics on the most frequent times of travel."""
@@ -87,15 +91,15 @@ def time_stats(df):
     df['month'] = df['Start Time'].dt.month
     # Find the most common month
     popular_month = df['month'].mode()[0]
-    print('Most common month: ', popular_month)
+    print('Most common month: {}'.format(popular_month))
 
     # TO DO: display the most common day of week
     # Convert the Start Time to datetime -- already done above
     # Extract day from the Start Time column to create a day column
-    df['day_of_week'] = df['Start Time'].dt.weekday_name
+    df['day_of_week'] = df['Start Time'].dt.day_name()
     # Find the most common day
     popular_day = df['day_of_week'].mode()[0]
-    print('Most common day: ', popular_day)  
+    print('Most common day: {}'.format(popular_day))
 
     # TO DO: display the most common start hour
     # Convert the Start Time to datetime -- already done above
@@ -103,9 +107,9 @@ def time_stats(df):
     df['hour'] = df['Start Time'].dt.hour
     # Find the most common start hour
     popular_hour = df['hour'].mode()[0]
-    print('Most common start hour: ', popular_hour)  
+    print('Most common start hour: {}'.format(popular_hour))
 
-    print("\nThis took %s seconds." % round((time.time() - start_time), 1))
+    print("\nThis took %s seconds." % start_the_clock())
     print('-'*40)
 
 
@@ -117,18 +121,18 @@ def station_stats(df):
 
     # TO DO: display most commonly used start station
     popular_start_station = df['Start Station'].mode()[0]
-    print('Most common start station: ', popular_start_station)
+    print('Most common start station: {}'.format(popular_start_station))
 
     # TO DO: display most commonly used end station
     popular_end_station = df['End Station'].mode()[0]
-    print('Most common end station: ', popular_end_station)
+    print('Most common end station: {}'.format(popular_end_station))
 
     # *** SOURCE FOR THE CODE IN THIS FUNCTION: https://stackoverflow.com/questions/53037698/how-can-i-find-the-most-frequent-two-column-combination-in-a-dataframe-in-python (BENY; October 29, 2018) ***
     # TO DO: display most frequent combination of start station and end station trip
     combo_stations = df.groupby(['Start Station','End Station']).size().idxmax()
-    print('Most common combination of start station and end station: ', combo_stations) 
+    print('Most common combination of start station and end station: {}'.format(combo_stations))
 
-    print("\nThis took %s seconds." % round((time.time() - start_time), 1))
+    print("\nThis took %s seconds." % start_the_clock())
     print('-'*40)
 
 
@@ -140,13 +144,13 @@ def trip_duration_stats(df):
 
     # TO DO: display total travel time
     total_travel_time = df['Trip Duration'].sum()
-    print('The total travel time: ', round(total_travel_time, 1))
+    print('The total travel time: {}'.format(round(total_travel_time, 1)))
 
     # TO DO: display mean travel time
     mean_travel_time = df['Trip Duration'].mean()
-    print('The average travel time: ', round(mean_travel_time, 1))
+    print('The average travel time: {}'.format(round(mean_travel_time, 1)))
 
-    print("\nThis took %s seconds." % round((time.time() - start_time), 1))
+    print("\nThis took %s seconds." % start_the_clock())
     print('-'*40)
 
 
@@ -158,14 +162,14 @@ def user_stats(df):
 
     # TO DO: Display counts of user types
     user_types = df['User Type'].value_counts()
-    print('Number of user types:\n', user_types)
+    print('Number of user types:\n{}'.format(user_types))
     print('\n')
 
     # *** SOURCE FOR THE CODE IN THIS FUNCTION: https://stackoverflow.com/questions/24870306/how-to-check-if-a-column-exists-in-pandas#24870404 (chrisb; July 21, 2014) ***
     # TO DO: Display counts of gender
     if 'Gender' in df.columns:
         gender_types = df['Gender'].value_counts()
-        print('Number of gender types:\n', gender_types)
+        print('Number of gender types:\n{}'.format(gender_types))
         print('\n')
     else:
         print('The Gender column does not exist.')
@@ -174,16 +178,16 @@ def user_stats(df):
     # TO DO: Display earliest, most recent, and most common year of birth
     if 'Birth Year' in df.columns:
         # Earliest year of birth
-        print('Earliest year of birth: ', int(df['Birth Year'].min()))
+        print('Earliest year of birth: {}'.format(int(df['Birth Year'].min())))
         # Most recent year of birth
-        print('Most recent year of birth: ', int(df['Birth Year'].max()))
+        print('Most recent year of birth: {}'.format(int(df['Birth Year'].max())))
         # Most common year of birth
-        print('Most common year of birth: ', int(df['Birth Year'].mode()))
+        print('Most common year of birth: {}'.format(int(df['Birth Year'].mode())))
     else:
         print('The Birth Year column does not exist.')
         print('\n')
 
-    print("\nThis took %s seconds." % round((time.time() - start_time), 1))
+    print("\nThis took %s seconds." % start_the_clock())
     print('-'*40)
 
 # *** SOURCE FOR THE CODE IN THIS FUNCTION: Based on code provided by Reviewer from initial submission ***
